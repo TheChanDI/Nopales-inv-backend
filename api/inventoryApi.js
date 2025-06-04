@@ -30,7 +30,8 @@ const handler = async (req, res) => {
   xlsx.utils.book_append_sheet(workbook, worksheet, "Inventory");
 
   const fileName = `nopales_inventory.xlsx`;
-  const filePath = path.join(__dirname, fileName);
+  //   const filePath = path.join(__dirname, fileName);
+  const filePath = path.join("/tmp", fileName);
 
   try {
     // Check if directory exists and is writable
