@@ -7,7 +7,7 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const createXlsFile = async (data) => {
+const handler = async (data) => {
   console.log(__dirname, "dir name");
 
   const flatData = [];
@@ -92,4 +92,4 @@ const sendEmail = async (filePath) => {
   }
 };
 
-export default createXlsFile;
+export default handler;
