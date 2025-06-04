@@ -44,8 +44,15 @@ const handler = async (req, res) => {
     console.log(`Excel file created successfully at: ${filePath}`);
     //sending email
     const isSent = await sendEmail(filePath);
-    console.log(isSent, "---->");
-    return isSent;
+    if (isSent) {
+      return res
+        .status(200)
+        .json({ success: true, message: "Email sent successfully." });
+    } else {
+      return res
+        .status(500)
+        .json({ success: false, message: "Failed to send email." });
+    }
   } catch (error) {
     console.error("Error creating Excel file:", error);
     return false;
