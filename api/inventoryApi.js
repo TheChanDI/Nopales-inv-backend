@@ -7,8 +7,10 @@ import path from "path";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const handler = async (data) => {
-  console.log(__dirname, "dir name");
+const handler = async (req, res) => {
+  if (req.method !== "POST") return res.status(405).send("Only POST allowed");
+
+  const data = req.body;
 
   const flatData = [];
 
