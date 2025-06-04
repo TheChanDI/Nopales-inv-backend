@@ -54,8 +54,9 @@ const handler = async (req, res) => {
         .json({ success: false, message: "Failed to send email." });
     }
   } catch (error) {
-    console.error("Error creating Excel file:", error);
-    return false;
+    return res
+      .status(500)
+      .json({ success: false, message: "Failed to send email." });
   }
 };
 
