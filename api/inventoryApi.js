@@ -11,10 +11,12 @@ const handler = async (req, res) => {
   if (req.method !== "POST") return res.status(405).send("Only POST allowed");
 
   const data = req.body;
+  const inventoryData = data.data;
+  const email = data.email;
 
   const flatData = [];
 
-  for (const [category, products] of Object.entries(data)) {
+  for (const [category, products] of Object.entries(inventoryData)) {
     for (const [productName, details] of Object.entries(products)) {
       flatData.push({
         Category: category,
@@ -44,7 +46,7 @@ const handler = async (req, res) => {
 
     console.log(`Excel file created successfully at: ${filePath}`);
     //sending email
-    const isSent = await sendEmail(filePath);
+    const isSent = await sendEmail(email, filePath);
     if (isSent) {
       return res
         .status(200)
@@ -61,7 +63,7 @@ const handler = async (req, res) => {
   }
 };
 
-const sendEmail = async (filePath) => {
+const sendEmail = async (email, filePath) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     port: 587,
@@ -75,7 +77,7 @@ const sendEmail = async (filePath) => {
   // Mail options
   const mailOptions = {
     from: "chandiprakash16@gmail.com",
-    to: "hello@nopales.com.au",
+    to: email,
     subject: "Inventory Count Excel File",
     text: "Attached is the inventory Excel file.",
     attachments: [
