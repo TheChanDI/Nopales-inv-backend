@@ -75,7 +75,7 @@ const sendEmail = async (filePath) => {
   // Mail options
   const mailOptions = {
     from: "chandiprakash16@gmail.com",
-    to: "rcklsschandi@gmail.com",
+    to: "hello@nopales.com.au",
     subject: "Inventory Count Excel File",
     text: "Attached is the inventory Excel file.",
     attachments: [
